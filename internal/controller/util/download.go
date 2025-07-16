@@ -34,12 +34,12 @@ func DownloadCommands(preInstalledK0s bool, url string, version string) []string
 
 	if version != "" {
 		return []string{
-			fmt.Sprintf("curl -sSfL --retry 5 https://get.k0s.sh | sudo K0S_VERSION=%s sh", version),
+			fmt.Sprintf("curl -sSfL --retry 5 https://get.k0s.sh | K0S_VERSION=%s sh", version),
 		}
 	}
 
 	// Default to k0s get script to download the latest version
 	return []string{
-		"curl -sSfL --retry 5 https://get.k0s.sh | sudo sh",
+		"curl -sSfL --retry 5 https://get.k0s.sh | sh",
 	}
 }

@@ -152,7 +152,8 @@ func (p *SSHProvisioner) Cleanup(ctx context.Context, mode RemoteMachineMode) er
 		return fmt.Errorf("failed to connect to host: %w", err)
 	}
 	defer rigClient.Disconnect()
-
+	// log the values of sudo and mode for debugging
+	p.log.Info("Cleaning up machine", "machine", p.machine.Name, "useSudo", p.machine.Spec.UseSudo, "mode", mode)
 	if p.machine.Spec.UseSudo {
 		// If sudo is required, wrap the client with sudo capabilities
 		rigClient = rigClient.Sudo()
