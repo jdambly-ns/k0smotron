@@ -88,7 +88,7 @@ func (p *SSHProvisioner) Provision(ctx context.Context) error {
 		return fmt.Errorf("failed to connect to host: %w", err)
 	}
 	defer rigClient.Disconnect()
-
+	log.Info("Connected to remote machine", "address", p.machine.Spec.Address, "port", p.machine.Spec.Port, "user", p.machine.Spec.User, "useSudo", p.machine.Spec.UseSudo)
 	if p.machine.Spec.UseSudo {
 		// If sudo is required, wrap the client with sudo capabilities
 		rigClient = rigClient.Sudo()
